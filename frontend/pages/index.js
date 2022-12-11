@@ -529,7 +529,7 @@ export default function Home() {
     return (
       <>
         <div>
-          <h1 className={styles.title}>Crypto Devs NFTs!</h1>
+          <h1 className={styles.title}>NFT Minter</h1>
           <div className={styles.description}>
             This is an NFT collection for developers in Crypto. NFT holders get special privileges.
           </div>
@@ -833,30 +833,37 @@ export default function Home() {
 
   const ICO_pagecontent = () => {
     return (
-      <div>
-        <h1 className={styles.title}>Crypto Devs ICO</h1>
-        <div className={styles.description}>
-          You can claim or mint Crypto Dev tokens here
-        </div>
-        {walletConnected ? (
-          <div>
-            <div className={styles.description}>
-              {/* Format Ether helps us in converting a BigNumber to string */}
-              You have minted {utils.formatEther(balanceOfCryptoDevTokens)} Crypto
-              Dev Tokens
-            </div>
-            <div className={styles.description}>
-              {/* Format Ether helps us in converting a BigNumber to string */}
-              Overall {utils.formatEther(tokensMinted)}/10000 have been minted!!!
-            </div>
-            {renderButton_ICO()}
+      <>
+        <div>
+          <h1 className={styles.title}>Crypto Devs ICO</h1>
+          <div className={styles.description}>
+            You can claim or mint Crypto Dev tokens here
           </div>
-        ) : (
-          <button onClick={connectWallet} className={styles.button}>
-            Connect your wallet
-          </button>
-        )}
-      </div>
+          {walletConnected ? (
+            <div>
+              <div className={styles.description}>
+                {/* Format Ether helps us in converting a BigNumber to string */}
+                You have minted {utils.formatEther(balanceOfCryptoDevTokens)} Crypto
+                Dev Tokens
+              </div>
+              <div className={styles.description}>
+                {/* Format Ether helps us in converting a BigNumber to string */}
+                Overall {utils.formatEther(tokensMinted)}/10000 have been minted!!!
+              </div>
+              {renderButton_ICO()}
+            </div>
+          ) : (
+            <button onClick={connectWallet} className={styles.button}>
+              Connect your wallet
+            </button>
+          )}
+        </div>
+
+        <div>
+          <img src="./cryptodevs/3.svg"></img>
+        </div>
+
+      </>
     )
   }
 
@@ -1586,28 +1593,21 @@ export default function Home() {
   return (
     <div>
       <Head>
-        <title>CryptoDevs project</title>
+        <title > CryptoDevs project</title>
         <meta name="description" content="NFT all-in-one" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <h1>Crypto Devs All-in-One</h1>
+      <h1 className={styles.bigtitle} >Crypto Devs All-in-One</h1>
 
       <div className={styles.main}>
-
         {whitelist_pagecontent()}
-
         {NFT_pagecontent()}
-
-
       </div>
+
       <div className={styles.main}>
         {ICO_pagecontent()}
-        <img src="./cryptodevs/3.svg"></img>
-
-
         {DEX_pagecontent()}
-
       </div>
 
       <div className={styles.main}>

@@ -13,12 +13,14 @@ a {
 
 * {
   box-sizing: border-box;
+  font-family: Arial, "Roboto", "Open Sans", Verdana, "Sans Serif";
 }
 
 @media (prefers-color-scheme: dark) {
   html {
     color-scheme: dark;
   }
+
   body {
     color: white;
     background: black;

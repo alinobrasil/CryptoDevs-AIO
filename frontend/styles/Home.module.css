@@ -4,7 +4,14 @@
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  font-family: "Courier New", Courier, monospace;
+  padding: 20px;
+  margin: 20px;
+}
+
+.bigtitle {
+  font-size: 3em;
+  justify-content: center;
+  display: flex;
 }
 
 .footer {
@@ -16,20 +23,22 @@
 }
 
 .image {
-  width: 70%;
-  height: 50%;
+  width: 40%;
+  height: 40%;
   margin-left: 20%;
 }
 
 .title {
   font-size: 2rem;
   margin: 2rem 0;
+  padding: 10px;
 }
 
 .description {
   line-height: 1;
   margin: 2rem 0;
   font-size: 1.2rem;
+  padding: 10px;
 }
 
 .button {
@@ -39,10 +48,12 @@
   color: #ffffff;
   font-size: 15px;
   padding: 20px;
+  margin: 5px;
   width: 200px;
   cursor: pointer;
   margin-bottom: 2%;
 }
+
 @media (max-width: 1000px) {
   .main {
     width: 100%;
