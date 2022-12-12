@@ -5,6 +5,10 @@ import { BigNumber, Contract, providers, utils } from "ethers";
 import { formatEther } from "ethers/lib/utils";
 import { useEffect, useRef, useState } from "react";
 
+
+import styled from 'styled-components';
+
+
 import {
   WHITELIST_CONTRACT_ADDRESS,
   WHITELIST_CONTRACT_ABI,
@@ -42,6 +46,8 @@ export default function Home() {
   const [walletConnected, setWalletConnected] = useState(false);
   // const [loading, setLoading] = useState(false);
 
+  const [currentAccount, setCurrentAccount] = useState("");
+
 
   // Create a BigNumber `0`. used in ICO and Dex
   const zero = BigNumber.from(0);
@@ -51,6 +57,7 @@ export default function Home() {
     // Since we store `web3Modal` as a reference, we need to access the `current` value to get access to the underlying object
     const provider = await web3ModalRef.current.connect();
     const web3Provider = new providers.Web3Provider(provider);
+
 
     // If user is not connected to the Goerli network, let them know and throw an error
     const { chainId } = await web3Provider.getNetwork();
@@ -68,18 +75,89 @@ export default function Home() {
 
   const connectWallet = async () => {
     try {
-      // Get the provider from web3Modal, which in our case is MetaMask
-      // When used for the first time, it prompts the user to connect their wallet
-      await getProviderOrSigner();
-      setWalletConnected(true);
+      if (!walletConnected) {
+        // Get the provider from web3Modal, which in our case is MetaMask
+        // When used for the first time, it prompts the user to connect their wallet
 
-      // for WHITELIST
-      checkIfAddressInWhitelist();
-      getNumberOfWhitelisted();
+        web3ModalRef.current = new Web3Modal({
+          network: "goerli",
+          providerOptions: {},
+          disableInjectedProvider: false,
+        });
+        
+        
+        //   .then(() => {    //For DAO------
+        //     getDAOTreasuryBalance();
+        //     getUserNFTBalance();
+        //     getNumProposalsInDAO();
+        //   });;  //-------
+
+        let x = await getProviderOrSigner(true);
+        setWalletConnected(true);
+
+        let addr = await x.getAddress()
+        setCurrentAccount(addr)
+        // // console.log(addr)
+        // // console.log(utils.getAddress(addr))
+
+        // // for WHITELIST
+        // checkIfAddressInWhitelist();
+        // getNumberOfWhitelisted();
+
+        // // Set an interval which gets called every 5 seconds to check presale has ended
+        // const presaleEndedInterval = setInterval(async function () {
+        //   const _presaleStarted = await checkIfPresaleStarted();
+        //   if (_presaleStarted) {
+        //     const _presaleEnded = await checkIfPresaleEnded();
+        //     if (_presaleEnded) {
+        //       clearInterval(presaleEndedInterval);
+        //     }
+        //   }
+        // }, 5 * 1000);
+
+        // // set an interval to get the number of token Ids minted every 5 seconds
+        // setInterval(async function () {
+        //   await getTokenIdsMinted();
+        // }, 5 * 1000);
+
+        // // For ICO -------------------------------------------
+        // getTotalTokensMinted();
+        // getBalanceOfCryptoDevTokens();
+        // getTokensToBeClaimed();
+        // // withdrawCoins();
+
+        // // For DEX ----------------------------
+        // getAmounts();
+      } // endif
+
     } catch (err) {
       console.error(err);
     }
   };
+
+  const render_connect_button = ()=>{
+    return (
+      <>
+        Wallet not connected yet
+        <button onClick={connectWallet} className={styles.button}>Connect Wallet</button>
+      </>
+    )
+  }
+
+  const show_address_abbr = () => {
+    let addr = "asdf"
+    addr = currentAccount
+    return (
+      <div>
+            {`Connected: ${addr.slice(0,4)}...${addr.slice(-4)}`}
+      </div>
+      )
+  }
+
+  useEffect( ()=> {
+    let x = getProviderOrSigner()
+    console.log(x)
+  })
 
   useEffect(() => {
     // if wallet is not connected, create a new instance of Web3Modal and connect the MetaMask wallet
@@ -92,47 +170,47 @@ export default function Home() {
         disableInjectedProvider: false,
       });
 
-      connectWallet()
-        .then(() => {    //For DAO------
-          getDAOTreasuryBalance();
-          getUserNFTBalance();
-          getNumProposalsInDAO();
-        });;  //-------
+      // connectWallet()
+      //   .then(() => {    //For DAO------
+      //     getDAOTreasuryBalance();
+      //     getUserNFTBalance();
+      //     getNumProposalsInDAO();
+      //   });;  //-------
 
-      //For NFT minter -------------------------
-      // Check if presale has started and ended
-      const _presaleStarted = checkIfPresaleStarted();
-      if (_presaleStarted) {
-        checkIfPresaleEnded();
-      }
+      // //For NFT minter -------------------------
+      // // Check if presale has started and ended
+      // const _presaleStarted = checkIfPresaleStarted();
+      // if (_presaleStarted) {
+      //   checkIfPresaleEnded();
+      // }
 
-      getTokenIdsMinted();
+      // getTokenIdsMinted();
 
 
-      // Set an interval which gets called every 5 seconds to check presale has ended
-      const presaleEndedInterval = setInterval(async function () {
-        const _presaleStarted = await checkIfPresaleStarted();
-        if (_presaleStarted) {
-          const _presaleEnded = await checkIfPresaleEnded();
-          if (_presaleEnded) {
-            clearInterval(presaleEndedInterval);
-          }
-        }
-      }, 5 * 1000);
+      // // Set an interval which gets called every 5 seconds to check presale has ended
+      // const presaleEndedInterval = setInterval(async function () {
+      //   const _presaleStarted = await checkIfPresaleStarted();
+      //   if (_presaleStarted) {
+      //     const _presaleEnded = await checkIfPresaleEnded();
+      //     if (_presaleEnded) {
+      //       clearInterval(presaleEndedInterval);
+      //     }
+      //   }
+      // }, 5 * 1000);
 
-      // set an interval to get the number of token Ids minted every 5 seconds
-      setInterval(async function () {
-        await getTokenIdsMinted();
-      }, 5 * 1000);
+      // // set an interval to get the number of token Ids minted every 5 seconds
+      // setInterval(async function () {
+      //   await getTokenIdsMinted();
+      // }, 5 * 1000);
 
-      // For ICO -------------------------------------------
-      getTotalTokensMinted();
-      getBalanceOfCryptoDevTokens();
-      getTokensToBeClaimed();
-      // withdrawCoins();
+      // // For ICO -------------------------------------------
+      // getTotalTokensMinted();
+      // getBalanceOfCryptoDevTokens();
+      // getTokensToBeClaimed();
+      // // withdrawCoins();
 
-      // For DEX ----------------------------
-      getAmounts();
+      // // For DEX ----------------------------
+      // getAmounts();
 
 
 
@@ -1598,6 +1676,11 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
+      <div className={styles.navbar}>
+        { !walletConnected ? render_connect_button() : show_address_abbr() }
+      </div>
+
+
       <h1 className={styles.bigtitle} >Crypto Devs All-in-One</h1>
 
       <div className={styles.main}>
@@ -1620,3 +1703,28 @@ export default function Home() {
     </div>
   );
 }
+
+
+
+// const HeaderContainer = styled.div`
+//     min-height: 60px;
+//     /* position: fixed; */
+//     display: flex;
+//     align-items: center;
+//     /* vertical-align: center; */
+//     justify-content: space-between;
+//     background-color: #ffffff;
+
+//     /* padding: 0 20px; */
+//     padding: 20px;
+//     padding-left: 40px;
+//     padding-right: 40px;
+    
+//     margin-top: -10px;
+//     margin-left: -10px;
+//     margin-right: -10px;
+
+//     top: 0;
+//     left: 0;
+//     right: 0; 
+// `
