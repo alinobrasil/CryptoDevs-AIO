@@ -41,6 +41,8 @@ export default function Home() {
   // walletConnected keep track of whether the user's wallet is connected or not
   const [walletConnected, setWalletConnected] = useState(false);
   // const [loading, setLoading] = useState(false);
+  const [currentTab, setCurrentTab] = useState("whitelist")
+
 
 
   // Create a BigNumber `0`. used in ICO and Dex
@@ -1599,6 +1601,10 @@ export default function Home() {
       </Head>
 
       <h1 className={styles.bigtitle} >Crypto Devs All-in-One</h1>
+
+      <div onClick={setCurrentTab("whitelist")}>
+        Whitelist
+      </div>
 
       <div className={styles.main}>
         {whitelist_pagecontent()}
