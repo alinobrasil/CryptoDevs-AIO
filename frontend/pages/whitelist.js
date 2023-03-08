@@ -4,7 +4,7 @@ import { useContext, useEffect, useRef, useState } from "react";
 import styles from "../styles/Home.module.css";
 import { BigNumber, Contract, providers, utils } from "ethers";
 import { WHITELIST_CONTRACT_ADDRESS, WHITELIST_CONTRACT_ABI, } from "../constants";
-function whitelist() {
+function Whitelist() {
     const context = useContext(AppContext);
     const {
         walletConnected,
@@ -136,7 +136,7 @@ function whitelist() {
             if (joinedWhitelist) {
                 return (
                     <div className={styles.description}>
-                        Congrats. You're already on the whitelist!
+                        Congrats. You&apos;re already on the whitelist!
                     </div>
                 );
             } else if (loadingWhitelist) {
@@ -164,4 +164,4 @@ function whitelist() {
     )
 }
 
-export default whitelist
+export default Whitelist

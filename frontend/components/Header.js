@@ -37,8 +37,8 @@ function Header() {
                 paddingTop: '13px',
                 backgroundColor: 'lightblue',
             }}>
-                <MenuItem path="/whitelist" label="Whitelist Signup" />
-                <MenuItem path="/NFT" label="NFT Minter" />
+                <MenuItem path="Whitelist" label="Whitelist Signup" />
+                <MenuItem path="NFT" label="NFT Minter" />
                 <MenuItem label="ICO" path="/ICO" />
                 <MenuItem label="DAO" path="/DAO" />
                 <MenuItem label="DEX" path="/DEX" />

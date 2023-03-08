@@ -26,9 +26,3 @@ This project is a collection of common features used by NFT & Defi Projects:
         - NFT details
         - prices of NFT or ERC20 token
         - presale duration
-- proxy (upgradable) contracts. 
-    - Be able to add logic to SCs
-    - option to disable future upgrades
-
-    
-

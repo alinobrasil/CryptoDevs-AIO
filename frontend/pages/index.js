@@ -28,7 +28,7 @@ export default function Home() {
                 <BigCard title={PageDescriptions.whitelist.title}
                     description={PageDescriptions.whitelist.description}
                     image={PageDescriptions.whitelist.image}
-                    path="/whitelist"
+                    path="/Whitelist"
                 />
                 <BigCard title={PageDescriptions.NFT.title}
                     description={PageDescriptions.NFT.description}

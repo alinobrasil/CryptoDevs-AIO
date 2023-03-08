@@ -318,7 +318,7 @@ export default function DAO() {
         return (
             <div>
                 <h1 className={styles.title}>Crypto Devs DAO</h1>
-                <div className={styles.description}>NFT holders get to create & vote on proposals deciding what to do with the DAO's treasury ETH.</div>
+                <div className={styles.description}>NFT holders get to create & vote on proposals deciding what to do with the DAO&apos;s treasury ETH.</div>
                 <div className={styles.description}>
                     Your CryptoDevs NFT Balance: {nftBalance}
                     <br />
