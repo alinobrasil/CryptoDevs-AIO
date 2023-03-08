@@ -1,4 +1,13 @@
-# Crypto Devs All-in-One
+# Demo URL
+https://crypto-devs-aio.vercel.app/
+
+# How to run it yourself:
+1. clone the repo
+2. npm install
+3. npm run start
+
+
+# Crypto Devs All-in-One NFT Suite
 This project is a collection of common features used by NFT & Defi Projects:
 
 - Whitelist
